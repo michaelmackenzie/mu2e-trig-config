@@ -6,8 +6,8 @@ TrigRecoSequences:{
    trkPrepareHits          : [ TrigMakeSD     , TrigMakeSH     , TrigMakePH     , TrigFlagPH ]
    trkPrepareHitsOffSpill  : [ TrigMakeSD, TrigOffSpMakeSH, TrigOffSpMakePH ]
    #calorimeter reco
-   calPrepareHits     : [ CaloHitMakerFast ]
-   calReco            : [ CaloHitMakerFast, CaloClusterFast ]
+   calPrepareHits     : [ CaloDigiMakerFast, CaloHitMakerFast ]
+   calReco            : [ CaloDigiMakerFast, CaloHitMakerFast, CaloClusterFast ]
    #track fitting, where Offline may override to append MC matching
    aprKSFDeSequence : [ TrigAprKSF ]
    aprKSFUeSequence : [ TrigAprUeKSF ]

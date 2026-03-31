@@ -32,6 +32,15 @@ TrigCalProducers : {
   }
 
 
+  CaloDigiMakerFast:
+  {
+    module_type   : "CaloDigisFromDTCEvents"
+    dataType : 0
+    diagLevel : 0
+    useOfflineID : true
+    useDTCROCID : false
+  }
+
   CaloHitMakerFast:
   {
     module_type   : "CaloHitsFromDTCEvents"
@@ -46,7 +55,6 @@ TrigCalProducers : {
     hitEDepMin    : 1.0
     caphriEDepMax : 5.0 #MeV
     caphriEDepMin : 1.0 #MeV
-    ADCToMeV      : @local::ADCToMeV
   }
 
   CaloHitMakerFastFromDigi: {
