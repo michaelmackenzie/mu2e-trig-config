@@ -50,7 +50,7 @@ physics : {
            fetchStrawDigis        : 1
            fetchCaloFragments     : 0
            fetchTrkFragments      : 0
-           fetchAllFragments      : 0
+           fetchAllFragments      : 1
            fetchEWM               : 1
            fetchPBT               : 1
            caloDigiCollectionTag  : "CaloDigiMaker"

@@ -1,0 +1,80 @@
+#------------------------------------------------------------------------------
+# runs the trigger reco
+#------------------------------------------------------------------------------
+#  > mu2e --config mu2e-trig-config/test/triggerTest.fcl --source "your digis file" --TFile globalFilter.root --nevts=100
+#include "Offline/fcl/minimalMessageService.fcl"
+#include "Offline/fcl/standardServices.fcl"
+
+#include "mu2e-trig-config/core/trigProducers.fcl"
+#include "mu2e-trig-config/core/trigFilters.fcl"
+#include "mu2e-trig-config/core/trigRecoSequences.fcl"
+#include "mu2e-trig-config/core/trigSequences.fcl"
+
+#include "mu2e-trig-config/gen/trig_physMenuPSConfig_OnSpill.fcl"
+#include "mu2e-trig-config/gen/trig_physMenu_OnSpill.fcl"
+
+process_name : globalTrigger
+
+# we don't need any simulation services for this job
+
+services : @local::Services.Reco
+services.GeometryService.bFieldFile     : "Offline/Mu2eG4/geom/bfgeom_reco_v01.txt"
+source: { module_type: RootInput }
+services.TFileService.fileName : "/dev/null"
+
+# timing information
+services.TimeTracker : {
+  dbOutput : {
+    filename : "" #"runGlobalTrigger.db" #uncomment to create the .db output
+    overwrite : true
+  }
+}
+
+services.scheduler.wantSummary: true
+TrigRecoSequences.artFragmentsGen            : [ @nil ]
+
+physics : {
+
+   @table::TrigSequences
+   #@table::TrigLoggerOutputs
+
+   producers : { @table::TrigProducers.producers }
+   filters   : {
+      @table::TrigFilters.filters
+      @table::Trig_physMenuPSConfig
+  }
+  analyzers : {
+
+    CompareCaloDigis : {
+      module_type : CaloDigiCollectionsComparator
+      referenceTag : "CaloDigiMaker"
+      candidateTag : "CaloDigiMakerFast"
+      failOnMismatch : true
+      diagLevel : 1
+    }
+    CompareStrawDigis : {
+      module_type : StrawDigiCollectionsComparator
+      referenceDigiTag : "makeSD"
+      candidateDigiTag : "TrigMakeSD"
+      compareWaveforms : false
+      normalizeWaveformsTo10Bit : true
+      referenceWaveformTag : "makeSD"
+      candidateWaveformTag : "TrigMakeSD"
+      failOnMismatch : true
+      diagLevel : 0
+    }
+  }
+
+  EndPath : [ CompareCaloDigis, CompareStrawDigis ]
+  end_paths : [ EndPath ]
+}
+
+physics.trigger_paths : [@sequence::Trig_physMenu.trigger_paths]
+
+physics.producers.CaloHitMakerFast : { @table::TrigProducers.producers.CaloHitMakerFastFromDigi }
+physics.producers.CaloHitMakerFast.caloDigiCollection : "CaloDigiMakerFast"
+physics.producers.TrigMakeSD.allowOfflineFallbackWhenPanelMapMissing : true
+physics.producers.TrigMakeSD.forceOfflineAddressing : true
+physics.producers.TrigMakeSD.geography : []
+#include "Production/Validation/database.fcl"
+#include "Production/JobConfig/reco/drop_trigger.fcl"
