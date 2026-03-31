@@ -10,8 +10,10 @@ from codecs import open
 # --------------------------------------------------------------------------------
 # Parse the trigger sequences
 # --------------------------------------------------------------------------------
-def parse_sequences(verbose):
-    with open("mu2e-trig-config/core/trigSequences.fcl", "r") as f:
+def parse_sequences(online, verbose):
+    file_path = "mu2e-trig-config/core/trigSequences.fcl"
+    if online: file_path = 'srcs/' + file_path
+    with open(file_path, "r") as f:
         paths = dict()
         current = ""
         started = False
@@ -52,9 +54,12 @@ def parse_sequences(verbose):
 # --------------------------------------------------------------------------------
 # Add the header info
 # --------------------------------------------------------------------------------
-def start_fcl(f):
+def start_fcl(f, fragments):
     f.write("# Trigger timing fcl\n\n")
-    f.write('#include "mu2e-trig-config/test/timingTest.fcl"\n\n')
+    if fragments:
+        f.write('#include "mu2e-trig-config/test/timingTestFragments.fcl"\n\n')
+    else:
+        f.write('#include "mu2e-trig-config/test/timingTest.fcl"\n\n')
 
 
 # --------------------------------------------------------------------------------
@@ -83,10 +88,10 @@ def add_path(path, sequence_map, f, verbose):
 # --------------------------------------------------------------------------------
 # Generate the fcl
 # --------------------------------------------------------------------------------
-def generate(name, paths, verbose):
-    sequence_map = parse_sequences(verbose)
+def generate(name, paths, online, fragments, verbose):
+    sequence_map = parse_sequences(online, verbose)
     with open(name, "w") as f:
-        start_fcl(f)
+        start_fcl(f, fragments)
         trigger_paths = "physics.trigger_paths : [ "
         counter = 0
         for path in paths:
@@ -122,12 +127,20 @@ if __name__ == "__main__":
         help="Name for output file",
     )
     parser.add_argument(
+        "-o", "--online", dest="online", default=False, type=bool, help="Assume Online setup"
+    )
+    parser.add_argument(
+        "-f", "--fragments", dest="fragments", default=False, type=bool, help="Run from fragments"
+    )
+    parser.add_argument(
         "-v", "--verbose", dest="verbose", default=0, type=int, help="Verbosity"
     )
 
     args = parser.parse_args()
     paths = args.paths.split(",")
     name = args.name
+    online = args.online
+    fragments = args.fragments
     verbose = args.verbose
 
     if not name.endswith(".fcl"):
@@ -136,4 +149,4 @@ if __name__ == "__main__":
     if verbose > 0:
         print(f"Using output fcl {name} with trigger paths {paths}")
 
-    generate(name, paths, verbose)
+    generate(name, paths, online, fragments, verbose)

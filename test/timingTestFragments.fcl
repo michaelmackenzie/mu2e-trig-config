@@ -1,5 +1,5 @@
 #------------------------------------------------------------------------------
-# runs the trigger reco, only for the main trigger paths
+# runs the trigger reco
 #------------------------------------------------------------------------------
 
 #include "Offline/fcl/minimalMessageService.fcl"
@@ -35,8 +35,6 @@ services.TimeTracker : {
 }
 services.scheduler.wantSummary: true
 
-
-
 physics : {
 
    @table::TrigSequences
@@ -63,17 +61,21 @@ physics : {
        }
    }
    filters   : {
-       @table::TrigFilters.filters
-       @table::Trig_physMenuPSConfig
-   }
+      @table::TrigFilters.filters
+      @table::Trig_physMenuPSConfig
+  }
 }
 
-# This gets replaced by genTimingFcl.py
 physics.trigger_paths : [@sequence::Trig_physMenu.trigger_paths]
 
-#include "mu2e-trig-config/core/trigDigiInputsEpilog.fcl"
+# physics.producers.CaloHitMakerFast : { @table::TrigProducers.producers.CaloHitMakerFastFromDigi }
+# physics.producers.CaloHitMakerFast.caloDigiCollection : "CaloDigiMakerFast"
+physics.producers.TrigMakeSD.allowOfflineFallbackWhenPanelMapMissing : true
+physics.producers.TrigMakeSD.forceOfflineAddressing : true
+physics.producers.TrigMakeSD.geography : []
 # #include "Production/Validation/database.fcl"
 # #include "Production/JobConfig/reco/drop_trigger.fcl"
+
 services.DbService.purpose: Sim_best
 services.DbService.version: v1_4
 services.DbService.verbose : 2

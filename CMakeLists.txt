@@ -32,6 +32,9 @@ install_fhicl(SUBDIRS core SUBDIRNAME mu2e-trig-config/core)
 install_fhicl(SUBDIRS core/producers SUBDIRNAME mu2e-trig-config/core/producers)
 install_fhicl(SUBDIRS core/filters   SUBDIRNAME mu2e-trig-config/core/filters)
 
+# For testing
+install_fhicl(SUBDIRS test           SUBDIRNAME mu2e-trig-config/test)
+
 install(DIRECTORY data DESTINATION ${CMAKE_INSTALL_DATAROOTDIR})
 install(DIRECTORY python DESTINATION .)
 
