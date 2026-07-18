@@ -13,7 +13,29 @@
             "bit" : 1100,
             "enabled": 1,
             "eventModeConfig" : [{"eventMode":"OnSpill", "prescale":-1, "streams": [ "physics_main", "dqm_trigger" ]},
-                                 {"eventMode":"OffSpill", "prescale":1, "streams": [ "cosmics_main", "physics_calo_calib" ]}]
+                                 {"eventMode":"OffSpill", "prescale":-1, "streams": [ "cosmics_main", "physics_calo_calib" ]}]
+        },
+
+        "crv_event"  :{
+            "bit" : 1400,
+            "enabled": 1,
+            "eventModeConfig" : [{"eventMode":"OnSpill", "prescale":-1, "streams": [ "physics_main", "dqm_trigger" ]},
+                                 {"eventMode":"OffSpill", "prescale":1, "streams": [ "cosmics_main" ]}]
+        },
+
+        "minBias_unbiased":{
+            "bit" : 620,
+            "enabled": 1,
+            "eventModeConfig" : [{"eventMode":"OnSpill", "prescale":-1, "streams": [ "physics_minBias" ]},
+                                 {"eventMode":"OffSpill", "prescale":1, "streams": [ "cosmics_main", "physics_minBias" ]}]
+        },
+
+        "lumiStream"          : {
+            "bit" : 800 ,
+            "enabled": 1,
+            "eventModeConfig": [{"eventMode":"OnSpill", "prescale":1, "streams": [ "luminosity" ] },
+                                {"eventMode":"OffSpill", "prescale":1, "streams": [ "luminosity" ]                                 }
+                               ]
         }
 
 

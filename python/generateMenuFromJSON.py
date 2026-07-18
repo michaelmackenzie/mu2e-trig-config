@@ -183,6 +183,7 @@ def generateMenu(
         if doIt == True:
             psConfig.write("   {}PS:".format(streamName) + " {\n")
             psConfig.write("      module_type: PrescaleEvent\n")
+            psConfig.write("      EventWindowMarker: ProcessCFOData\n")
         evtModes = dictMenu[path]["eventModeConfig"]
         psInput = "[ "
         notFirst = False
@@ -224,6 +225,7 @@ def generateMenu(
     if doIt:
         trigMenu.write("  ]\n")
         trigMenu.write("  trigger_list: [\n")
+        if "lumiStream" in list_of_calo_trk_paths: list_of_calo_trk_paths.remove("lumiStream") # FIXME
         for i in range(len(list_of_calo_trk_paths)):
             path = list_of_calo_trk_paths[i]
             trigMenu.write(f'     "{path}"')

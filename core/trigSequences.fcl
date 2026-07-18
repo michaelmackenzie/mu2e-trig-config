@@ -324,13 +324,16 @@ TrigSupPaths:{
   #unbiased filter. It selects the events based on their event id
   #unbiased           : [ unbiasedPS ]
 
-  #minimum bias filters. So far, a filter based on the StrawDigi occupancy
+  #minimum bias filters
+  minBias_unbiased : [ @sequence::TrigRecoSequences.cfoDataGen,  MinBiasUnbiasedPS ]
+
+  #StrawDigi occupancy
   minBias_SDCount : [ @sequence::TrigRecoSequences.cfoDataGen,  MinBiasSDCountPS, MinBiasSDCountFilter]
 
   #filter to select events with large occupancy in the tracker
   #largeSDCount       : [ @sequence::TrigRecoSequences.cfoDataGen,  largeSDCountPS, largeSDCountFilter]
 
-  #minimum bias filters. So far, a filter based on the StrawDigi occupancy
+  #StrawDigi occupancy
   minBias_CDCount : [ @sequence::TrigRecoSequences.cfoDataGen,  MinBiasCDCountPS, MinBiasCDCountFilter]
 
   #filter to select events with large occupancy in the tracker
@@ -347,6 +350,9 @@ TrigSupPaths:{
 
 }
 
+TrigCrvPaths:{
+  crv_event : [ @sequence::TrigRecoSequences.cfoDataGen,  CrvEventPS, CrvEventFilter ]
+}
 
 TrigSequences:{
   #@table::TrigRecoSequences
@@ -354,6 +360,7 @@ TrigSequences:{
   @table::TrigCaloPaths
   @table::TrigCstPaths
   @table::TrigSupPaths
+  @table::TrigCrvPaths
 }
 
 END_PROLOG

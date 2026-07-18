@@ -1,0 +1,15 @@
+BEGIN_PROLOG
+
+TrigCrvFilters:{
+  CrvEventPS : { module_type: PrescaleEvent
+      eventModeConfig : [  { eventMode: OnSpill prescale:-1}, { eventMode: OffSpill prescale:-1} ]}
+
+  CrvEventFilter: {
+      module_type : CrvEventFilter
+      minExtraPackets : 40
+      debugEvery : 50000
+      printHistograms : false
+  }
+}
+
+END_PROLOG

@@ -24,6 +24,8 @@ TrigTrkProducers : {
     WriteStrawHitCollection : false
     StrawDigiADCWaveformCollectionTag : "notUsed"
     StrawDigiCollectionTag : "TrigMakeSD"
+    ProtonBunchTimeTag : "ProcessCFOData"
+    EventWindowMarker  : "ProcessCFOData"
   }
 
   TrigMakePH: {
@@ -35,6 +37,7 @@ TrigTrkProducers : {
     ComboHitCollection    : "TrigMakeSH"
     StrawHitSelectionBits : ["TimeSelection"]
     StrawHitMask          : ["Dead"]
+    EventWindowMarker     : "ProcessCFOData"
   }
 
   # combine panel hits in a station

@@ -27,6 +27,7 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/python/generateMenuFromJSON.py      $
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/data/physMenu.json                  ${CURRENT_BINARY_DIR} data/physMenu.json                          COPYONLY)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/data/extrPosMenu.json               ${CURRENT_BINARY_DIR} data/extrPosMenu.json                       COPYONLY)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/data/noFieldMenu.json               ${CURRENT_BINARY_DIR} data/noFieldMenu.json                       COPYONLY)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/data/commissioningMenu.json         ${CURRENT_BINARY_DIR} data/commissioningMenu.json                 COPYONLY)
 
 install_fhicl(SUBDIRS core SUBDIRNAME mu2e-trig-config/core)
 install_fhicl(SUBDIRS core/producers SUBDIRNAME mu2e-trig-config/core/producers)

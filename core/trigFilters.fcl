@@ -11,6 +11,7 @@
 #include "mu2e-trig-config/core/filters/trigSupFilters.fcl"
 #include "mu2e-trig-config/core/filters/trigCalFilters.fcl"
 #include "mu2e-trig-config/core/filters/trigMprFilters.fcl"
+#include "mu2e-trig-config/core/filters/trigCrvFilters.fcl"
 
 BEGIN_PROLOG
 
@@ -24,6 +25,7 @@ TrigFilters : {
     @table::TrigSupFilters
     @table::TrigCalFilters
     @table::TrigMprFilters
+    @table::TrigCrvFilters
   }
 }
 
