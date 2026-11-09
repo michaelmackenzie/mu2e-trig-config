@@ -56,15 +56,6 @@ TrigCprProducers : {
       TimeClusterCollectionLabel: "TrigCalTimePeakFinder"
       debugLevel: 0
       diagLevel: 0
-      diagPlugin: {
-         mcTruth: 0
-         mcUtils: {
-            strawDigiMCCollTag: "compressDigiMCs"
-            tool_type: "TrkPatRecMcUtils"
-            comboHitCollTag: "TrigMakeSH"
-         }
-         tool_type: "CalHelixFinderDiag"
-      }
       Helicities: [
          -1,
          1
@@ -132,15 +123,6 @@ TrigCprProducers : {
       TimeClusterCollectionLabel: "TrigCalTimePeakFinderUe"
       debugLevel: 0
       diagLevel: 0
-      diagPlugin: {
-         mcTruth: 0
-         mcUtils: {
-            strawDigiMCCollTag: "compressDigiMCs"
-            tool_type: "TrkPatRecMcUtils"
-            comboHitCollTag: "TrigMakeSH"
-         }
-         tool_type: "CalHelixFinderDiag"
-      }
       Helicities: [
          -1,
          1
@@ -169,11 +151,6 @@ TrigCprProducers : {
       CaloClusterModuleLabel: "CaloClusterFast"
       DebugLevel: 0
       DiagLevel: 0
-      DiagPlugin: {
-         mcTruth: 0
-         diagLevel: 0
-         tool_type: "CalTimePeakFinderDiag"
-      }
       DtOffset: 0
       MinClusterEnergy: 50
       MinClusterSize: 2
@@ -196,11 +173,6 @@ TrigCprProducers : {
       CaloClusterModuleLabel: "CaloClusterFast"
       DebugLevel: 0
       DiagLevel: 0
-      DiagPlugin: {
-         diagLevel: 0
-         mcTruth: 0
-         tool_type: "CalTimePeakFinderDiag"
-      }
       DtOffset: -3.1
       MinClusterEnergy: 50
       MinClusterSize: 2
