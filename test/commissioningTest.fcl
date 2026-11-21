@@ -17,7 +17,7 @@ process_name : globalTrigger
 # we don't need any simulation services for this job
 
 services : @local::Services.Reco
-services.GeometryService.bFieldFile     : "Offline/Mu2eG4/geom/bfgeom_reco_v01.txt"
+services.GeometryService.bFieldFile     : "Offline/GeometryService/geom/bfgeom_reco_v01.txt"
 source: { module_type: RootInput }
 services.TFileService.fileName : "/dev/null"
 
