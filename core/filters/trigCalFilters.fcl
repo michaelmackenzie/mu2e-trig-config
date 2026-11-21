@@ -14,6 +14,14 @@ TrigCalClusterID : {
 }
 
 TrigCalFilters:{
+  CaloHitsPS    : { module_type: PrescaleEvent
+      eventModeConfig : [  { eventMode: OnSpill prescale:-1}, { eventMode: OffSpill prescale:-1} ]}
+  CaloCsiPS    : { module_type: PrescaleEvent
+      eventModeConfig : [  { eventMode: OnSpill prescale:-1}, { eventMode: OffSpill prescale:-1} ]}
+  CaloLaserPS    : { module_type: PrescaleEvent
+      eventModeConfig : [  { eventMode: OnSpill prescale:-1}, { eventMode: OffSpill prescale:-1} ]}
+  CaloCaphriPS    : { module_type: PrescaleEvent
+      eventModeConfig : [  { eventMode: OnSpill prescale:-1}, { eventMode: OffSpill prescale:-1} ]}
   CaloCosmicPS    : { module_type: PrescaleEvent
       eventModeConfig : [  { eventMode: OnSpill prescale:-1}, { eventMode: OffSpill prescale:-1} ]}
   CaloNNCEPS   : { module_type: PrescaleEvent
@@ -34,6 +42,54 @@ TrigCalFilters:{
       eventModeConfig : [  { eventMode: OnSpill prescale:-1}, { eventMode: OffSpill prescale:-1} ]}
   CaloN0SourcePS : { module_type: PrescaleEvent
       eventModeConfig : [  { eventMode: OnSpill prescale:-1}, { eventMode: OffSpill prescale:-1} ]}
+
+  CaloEventFilter: {
+    module_type: "CaloEventFilter"
+    debugEvery: 600000
+  }
+
+  CaloHitFilter1: {
+    module_type: "CaloHitFilter"
+    minimumHits: 1
+    debugEvery: 600000
+  }
+
+  CaloHitFilter2: {
+    module_type: "CaloHitFilter"
+    minimumHits: 2
+    debugEvery: 600000
+  }
+
+  CaloHitFilter10: {
+    module_type: "CaloHitFilter"
+    minimumHits: 10
+    debugEvery: 600000
+  }
+
+  CaloHitFilterLaser: {
+    module_type: "CaloHitFilter"
+    minimumHits: 2500
+    debugEvery: 600000
+  }
+
+  CaloLaserFilter: {
+    module_type: "CaloLaserFilter"
+    minimumHits: 1
+    checkDiskPins: true
+    debugEvery: 600000
+  }
+
+  CaloCAPHRIFilter: {
+    module_type: "CaloCAPHRIFilter"
+    minimumHits: 1
+    debugEvery: 600000
+  }
+
+  CaloCSIFilter: {
+    module_type: "CaloCSIFilter"
+    minimumHits: 2
+    debugEvery: 600000
+  }
 
   CaloCosmicFilter: {
     CaloClusterModuleLabel: "CaloClusterFast"

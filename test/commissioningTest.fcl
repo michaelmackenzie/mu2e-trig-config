@@ -1,0 +1,37 @@
+#------------------------------------------------------------------------------
+# Test the commissioning menu
+#------------------------------------------------------------------------------
+#include "Offline/fcl/minimalMessageService.fcl"
+#include "Offline/fcl/standardServices.fcl"
+
+#include "mu2e-trig-config/core/trigProducers.fcl"
+#include "mu2e-trig-config/core/trigFilters.fcl"
+#include "mu2e-trig-config/core/trigRecoSequences.fcl"
+#include "mu2e-trig-config/core/trigSequences.fcl"
+
+#include "mu2e-trig-config/gen/trig_commissioningMenuPSConfig.fcl"
+#include "mu2e-trig-config/gen/trig_commissioningMenu.fcl"
+
+process_name : globalTrigger
+
+# we don't need any simulation services for this job
+
+services : @local::Services.Reco
+services.GeometryService.bFieldFile     : "Offline/Mu2eG4/geom/bfgeom_reco_v01.txt"
+source: { module_type: RootInput }
+services.TFileService.fileName : "/dev/null"
+
+services.scheduler.wantSummary: true
+
+physics : {
+   @table::TrigSequences
+   #@table::TrigLoggerOutputs
+
+   producers : { @table::TrigProducers.producers }
+   filters   : {
+      @table::TrigFilters.filters
+      @table::Trig_commissioningMenuPSConfig
+   }
+}
+
+physics.trigger_paths : [@sequence::Trig_commissioningMenu.trigger_paths]

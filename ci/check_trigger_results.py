@@ -3,6 +3,9 @@
 import sys
 from math import sqrt
 
+# Should run in every event, previous was ProcessCFOData/EWMProducer
+TIMING_REF_MODULE = "LumiStreamPS"
+
 
 # --------------------------------------------------------------
 # Fill the log results
@@ -44,12 +47,8 @@ def fill_results(f, verbose=0):
                     )
                 )
             continue
-        # Check if it's the timing information for the art fragment from DTC module, for a reference timing
-        is_ref = len(words) == 7 and (
-            "artFragFromDTCEvents" in words[0]
-            or "processCFOData" in words[0]
-            or "ProcessCFOData" in words[0]
-        )
+        # Check if it's the reference module for node timing
+        is_ref = len(words) == 7 and TIMING_REF_MODULE in words[0]
         if is_ref and len(reference_timing_info) == 0:
             #             [min, avg, max, median, rms]
             reference_timing_info = [float(words[index]) for index in range(1, 6)]

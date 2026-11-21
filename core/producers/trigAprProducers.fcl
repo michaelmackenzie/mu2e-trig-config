@@ -31,6 +31,10 @@ TrigAprProducers : {
     maxEDepAvg              : 100.
     maxNHitsRatio           : 1.5
     doEDepFlag              : false
+    # heavy capture particles: the defaults (400 / 140 MeV/c) cut deuterons above KE ~ 42 MeV
+    # and tritons above ~ 29 MeV (triton endpoint p ~ 640 MeV/c)
+    maxHelixMomentum        : 800.
+    maxHelixPerpMomentum    : 300.
   }
 
   TrigAprHelixMerger: {
@@ -138,7 +142,13 @@ TrigAprProducers : {
   AprHlx30TriggerInfoMerger: {
     module_type: "MergeTriggerInfo"
   }
-  AprProtonTriggerInfoMerger: {
+  AprProtonP335TriggerInfoMerger: {
+    module_type: "MergeTriggerInfo"
+  }
+  AprProtonP250TriggerInfoMerger: {
+    module_type: "MergeTriggerInfo"
+  }
+  AprProtonP150TriggerInfoMerger: {
     module_type: "MergeTriggerInfo"
   }
   AprTCTriggerInfoMerger: {

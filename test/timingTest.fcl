@@ -10,7 +10,8 @@
 #include "mu2e-trig-config/core/trigRecoSequences.fcl"
 BEGIN_PROLOG
 # Add prefetch modules to avoid reading time being added to trigger reconstruction
-TrigRecoSequences.cfoDataGen : [ Prefetch, ProcessCFOData ]
+# Drop the EWMProducer, assume this is already in the digi data
+TrigRecoSequences.cfoDataGen : [ Prefetch ]
 END_PROLOG
 #include "mu2e-trig-config/core/trigSequences.fcl"
 

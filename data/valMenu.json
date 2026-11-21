@@ -248,6 +248,28 @@
                                ]
         },
 
+        "apr_proton_p335"   : {
+            "bit" : 270 ,
+            "enabled": 1,
+            "eventModeConfig": [{"eventMode":"OnSpill", "prescale":100, "streams": [ "physics_main", "dqm_trigger" ] },
+                                {"eventMode":"OffSpill", "prescale":-1, "streams": [ "cosmics_main", "physics_trk_calib" ]          }
+                               ]
+        },
+        "apr_proton_p250"   : {
+            "bit" : 271 ,
+            "enabled": 1,
+            "eventModeConfig": [{"eventMode":"OnSpill", "prescale":800, "streams": [ "physics_main", "dqm_trigger" ] },
+                                {"eventMode":"OffSpill", "prescale":-1, "streams": [ "cosmics_main", "physics_trk_calib" ]          }
+                               ]
+        },
+        "apr_proton_p150"   : {
+            "bit" : 272 ,
+            "enabled": 1,
+            "eventModeConfig": [{"eventMode":"OnSpill", "prescale":40000, "streams": [ "physics_main", "dqm_trigger" ] },
+                                {"eventMode":"OffSpill", "prescale":-1, "streams": [ "cosmics_main", "physics_trk_calib" ]          }
+                               ]
+        },
+
         "mpr_TrkDe_80m70p_D0200": {
             "bit" : 275 ,
             "enabled": 1,

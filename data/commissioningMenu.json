@@ -1,0 +1,110 @@
+{
+    "version": 1,
+
+    "trkcal_filter_process_name": "TrkCalEventFilter",
+
+    "crv_agg_process_name": "FinalEventBuilder",
+
+
+    "trigger_paths" : {
+
+
+        "trk_SH"  :{
+            "bit" : 1000,
+            "enabled": 1,
+            "eventModeConfig" : [{"eventMode":"OnSpill", "prescale":1, "streams": [ "physics_main", "dqm_trigger" ]},
+                                 {"eventMode":"OffSpill", "prescale":1, "streams": [ "cosmics_main" ]}]
+        },
+
+        "trk_TC"  :{
+            "bit" : 1010,
+            "enabled": 1,
+            "eventModeConfig" : [{"eventMode":"OnSpill", "prescale":1, "streams": [ "physics_main", "dqm_trigger" ]},
+                                 {"eventMode":"OffSpill", "prescale":1, "streams": [ "cosmics_main" ]}]
+        },
+
+        "calo_hits"  :{
+            "bit" : 1100,
+            "enabled": 1,
+            "eventModeConfig" : [{"eventMode":"OnSpill", "prescale":-1, "streams": [ "physics_main", "dqm_trigger" ]},
+                                 {"eventMode":"OffSpill", "prescale":-1, "streams": [ "cosmics_main", "physics_calo_calib" ]}]
+        },
+
+        "calo_csi"  :{
+            "bit" : 1101,
+            "enabled": 1,
+            "eventModeConfig" : [{"eventMode":"OnSpill", "prescale":-1, "streams": [ "physics_main", "dqm_trigger" ]},
+                                 {"eventMode":"OffSpill", "prescale":-1, "streams": [ "cosmics_main", "physics_calo_calib" ]}]
+        },
+
+        "calo_laser"  :{
+            "bit" : 1102,
+            "enabled": 1,
+            "eventModeConfig" : [{"eventMode":"OnSpill", "prescale":-1, "streams": [ "physics_main", "dqm_trigger" ]},
+                                 {"eventMode":"OffSpill", "prescale":-1, "streams": [ "cosmics_main", "physics_calo_calib" ]}]
+        },
+
+        "calo_caphri"  :{
+            "bit" : 1103,
+            "enabled": 1,
+            "eventModeConfig" : [{"eventMode":"OnSpill", "prescale":-1, "streams": [ "physics_main", "dqm_trigger" ]},
+                                 {"eventMode":"OffSpill", "prescale":-1, "streams": [ "cosmics_main", "physics_calo_calib" ]}]
+        },
+
+        "crv_event"  :{
+            "bit" : 1400,
+            "enabled": 1,
+            "eventModeConfig" : [{"eventMode":"OnSpill", "prescale":-1, "streams": [ "physics_main", "dqm_trigger" ]},
+                                 {"eventMode":"OffSpill", "prescale":-1, "streams": [ "cosmics_main" ]}]
+        },
+
+	"msd_hits" :{
+	    "bit" : 2000,
+	    "enabled": 0,
+            "eventModeConfig" : [{"eventMode":"OnSpill", "prescale":-1, "streams": [ "physics_main", "dqm_trigger" ]},
+                                 {"eventMode":"OffSpill", "prescale":-1, "streams": [ "cosmics_main" ]}]
+	},
+
+        "minBias_unbiased":{
+            "bit" : 620,
+            "enabled": 1,
+            "eventModeConfig" : [{"eventMode":"OnSpill", "prescale":-1, "streams": [ "physics_minBias" ]},
+                                 {"eventMode":"OffSpill", "prescale":-1, "streams": [ "cosmics_main", "physics_minBias" ]}]
+        },
+
+        "lumiStream"          : {
+            "bit" : 800 ,
+            "enabled": 1,
+            "eventModeConfig": [{"eventMode":"OnSpill", "prescale":1, "streams": [ "luminosity" ] },
+                                {"eventMode":"OffSpill", "prescale":1, "streams": [ "luminosity" ]                                 }
+                               ]
+        }
+
+
+    },
+
+    "agg_trigger_paths" : {
+    },
+
+    "dataLogger_streams": {
+        "physics_main"       : { "enabled" : 1 },
+        "physics_minBias"    : { "enabled" : 1 },
+        "physics_trk_calib"  : { "enabled" : 1 },
+        "physics_calo_calib" : { "enabled" : 1 },
+        "cosmics_main"       : { "enabled" : 1 },
+        "dqm_trigger"        : { "enabled" : 1 },
+        "luminosity"         : { "enabled" : 1 }
+    },
+
+    "dataLogger_analyzers": {
+    },
+
+    "lumiLogger_streams":{
+        "lumi": { "enabled" : 1 }
+    },
+
+    "lumiLogger_analyzers": {
+    }
+
+
+}

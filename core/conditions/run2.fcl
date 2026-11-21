@@ -6,30 +6,36 @@
 # trigProducers.fcl/trigFilters.fcl. Scenario files bind values with
 # @protect_ignore, so the defaults below are then ignored.
 #
+# Ordering: the values below are also bound with @protect_ignore, so the first
+# binding of each name wins and later assignments are SILENTLY ignored. A
+# scenario file (or any TrigTrkConfig.* override) included AFTER the trigger
+# fcls has no effect. To change a single value after the trigger fcls, set the
+# module parameter directly (e.g. physics.filters.<label>.minNStrawHits).
+#
 # Only use dotted assignments here: redefining the TrigTrkConfig table as a
 # whole would discard the protected scenario values.
 
 BEGIN_PROLOG
 
 # CPR:
-TrigTrkConfig.Cpr.HelixFinder.minNHit             : 10
-TrigTrkConfig.Cpr.HelixFinder.maxNHitsRatio       : 1.5
-TrigTrkConfig.Cpr.HelixFinder.minNHitsTimeCluster : 10
+TrigTrkConfig.Cpr.HelixFinder.minNHit             @protect_ignore: 10
+TrigTrkConfig.Cpr.HelixFinder.maxNHitsRatio       @protect_ignore: 1.5
+TrigTrkConfig.Cpr.HelixFinder.minNHitsTimeCluster @protect_ignore: 10
 
-TrigTrkConfig.Cpr.TCMinNStrawHits : 15 # time cluster filters
-TrigTrkConfig.Cpr.HSMinNStrawHits : 15 # helix seed filters
-TrigTrkConfig.Cpr.KSMinNStrawHits : 15 # kal seed filters
+TrigTrkConfig.Cpr.TCMinNStrawHits @protect_ignore: 15 # time cluster filters
+TrigTrkConfig.Cpr.HSMinNStrawHits @protect_ignore: 15 # helix seed filters
+TrigTrkConfig.Cpr.KSMinNStrawHits @protect_ignore: 15 # kal seed filters
 
 # APR:
-TrigTrkConfig.Apr.HelixFinder.maxSeedLineGap     : 250
-TrigTrkConfig.Apr.HelixFinder.maxNHitsRatio      : 1.5
-TrigTrkConfig.Apr.HelixFinder.minNHelixStrawHits : 12
-TrigTrkConfig.Apr.HelixFinder.minNHelixComboHits : 10
-TrigTrkConfig.Apr.HelixFinder.minSeedCircleHits  : 7
-TrigTrkConfig.Apr.HelixFinder.minFinalSeedHits   : 7
+TrigTrkConfig.Apr.HelixFinder.maxSeedLineGap     @protect_ignore: 250
+TrigTrkConfig.Apr.HelixFinder.maxNHitsRatio      @protect_ignore: 1.5
+TrigTrkConfig.Apr.HelixFinder.minNHelixStrawHits @protect_ignore: 12
+TrigTrkConfig.Apr.HelixFinder.minNHelixComboHits @protect_ignore: 10
+TrigTrkConfig.Apr.HelixFinder.minSeedCircleHits  @protect_ignore: 7
+TrigTrkConfig.Apr.HelixFinder.minFinalSeedHits   @protect_ignore: 7
 
-TrigTrkConfig.Apr.TCMinNStrawHits : 15 # time cluster filters
-TrigTrkConfig.Apr.HSMinNStrawHits : 15 # helix seed filters
-TrigTrkConfig.Apr.KSMinNStrawHits : 15 # kal seed filters
+TrigTrkConfig.Apr.TCMinNStrawHits @protect_ignore: 15 # time cluster filters
+TrigTrkConfig.Apr.HSMinNStrawHits @protect_ignore: 15 # helix seed filters
+TrigTrkConfig.Apr.KSMinNStrawHits @protect_ignore: 15 # kal seed filters
 
 END_PROLOG

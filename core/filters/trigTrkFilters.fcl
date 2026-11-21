@@ -1,0 +1,32 @@
+BEGIN_PROLOG
+
+TrigTrkFilters : {
+
+    TrkTCPS   : { module_type : PrescaleEvent
+        eventModeConfig : [ { eventMode: OnSpill prescale:-1 }, { eventMode: OffSpill prescale:-1 } ]}
+    TrkSHPS   : { module_type : PrescaleEvent
+        eventModeConfig : [ { eventMode: OnSpill prescale:-1 }, { eventMode: OffSpill prescale:-1 } ]}
+
+    TrkTCTCFilter: {
+        module_type           : TimeClusterFilter
+        timeClusterCollection : "TrkTCSimpleTimeCluster"
+        ComboHitCollection    : "TrigComMakeSH"
+        minNStrawHits         : 12
+        minNPlanes            : 1
+        requireCaloCluster    : false
+    }
+
+    TrkSHStrawHitFilter: {
+        module_type    : StrawHitFilter
+        shCollTag      : "TrigComMakeSH"
+        maxDt          : 40
+        minEDep        : 0.00050000002
+        minNGoodHits   : 2
+        debugMode      : false
+        debugBits      : []
+        fillHistograms : false
+	channelsToSkip : []
+    }
+}
+
+END_PROLOG

@@ -8,6 +8,10 @@
 #include "mu2e-trig-config/core/trigProducers.fcl"
 #include "mu2e-trig-config/core/trigFilters.fcl"
 #include "mu2e-trig-config/core/trigRecoSequences.fcl"
+BEGIN_PROLOG
+# Drop the EWMProducer, assume this is already in the digi data
+TrigRecoSequences.cfoDataGen : [ ]
+END_PROLOG
 #include "mu2e-trig-config/core/trigSequences.fcl"
 
 #include "mu2e-trig-config/gen/trig_physMenuPSConfig_OnSpill.fcl"

@@ -20,6 +20,15 @@ AprHelixSelections_pos : { # downstream e-minus/upstream e-plus
 AprHelixSelections_neg : { # downstream e-plus/upstream e-minus
   @table::AprHelixSelections_pos
 }
+AprProtonHelixSelection : { # base for the proton bands (AprProton*HSFilter)
+  @table::AprHelixSelections_pos
+  doHelicityCheck: false
+  maxAbsLambda: 2000
+  minAbsLambda: 40
+  maxD0: 600
+  minD0: -600
+  minNStrawHits: 20
+}
 AprTrackSelections_neg_de : { # downstream e-minus
   fitdirection: @local::FitDir.downstream
   fitparticle: @local::Particle.eminus
@@ -86,11 +95,15 @@ TrigAprFilters:{
       eventModeConfig  : [  { eventMode: OnSpill prescale:-1}, { eventMode: OffSpill prescale:-1} ]}
   AprHlx30PS              : { module_type: PrescaleEvent
       eventModeConfig  : [  { eventMode: OnSpill prescale:-1}, { eventMode: OffSpill prescale:-1} ]}
-  AprProtonPS             : { module_type: PrescaleEvent
+  AprProtonP335PS         : { module_type: PrescaleEvent
       eventModeConfig  : [  { eventMode: OnSpill prescale:-1}, { eventMode: OffSpill prescale:-1} ]}
   AprTCPS                 : { module_type: PrescaleEvent
       eventModeConfig  : [  { eventMode: OnSpill prescale:-1}, { eventMode: OffSpill prescale:-1} ]}
   AprTCCaloPS             : { module_type: PrescaleEvent
+      eventModeConfig  : [  { eventMode: OnSpill prescale:-1}, { eventMode: OffSpill prescale:-1} ]}
+  AprProtonP250PS         : { module_type: PrescaleEvent
+      eventModeConfig  : [  { eventMode: OnSpill prescale:-1}, { eventMode: OffSpill prescale:-1} ]}
+  AprProtonP150PS         : { module_type: PrescaleEvent
       eventModeConfig  : [  { eventMode: OnSpill prescale:-1}, { eventMode: OffSpill prescale:-1} ]}
 
   AprTrkDe80m70pD0200HSFilter: {
@@ -764,26 +777,49 @@ TrigAprFilters:{
     ComboHitCollection : "TrigMakePH"
   }
 
-  AprProtonHSFilter: {
+  # Muon capture protons and other charged capture particles (d, t, He3, alpha), in momentum bands
+  # sharing TrigAprProtonHelixFinder. The protons are forward (|lambda| ~ 1000 mm). There is no
+  # particle-ID cut: species are separated offline. The straw hit edep is compressed above ~4 keV
+  # and capped by the ADC near 5.8 keV, and a trigger cut on the mass from p and the helix t vs z
+  # slope (HelixFilter maxMass) would depend on the timing calibration.
+  AprProtonP335HSFilter: { # p > 335 MeV/c (KE > ~58 MeV)
     helixSeedCollection: "TrigAprProtonHelixMerger"
     module_type: "HelixFilter"
     useTrackerStatus: true
     posHelicitySelection : {
-      @table::AprHelixSelections_pos
-      maxAbsLambda: 1000
-      maxD0: 600
-      minAbsLambda: 40
-      minD0: -600
-      minMomentum: 80
+      @table::AprProtonHelixSelection
+      minMomentum: 335
+    }
+    negHelicitySelection : {
+      @table::AprProtonHelixSelection
+      minMomentum: 335
+    }
+  }
+  AprProtonP250HSFilter: { # p > 250 MeV/c (KE > ~33 MeV), prescaled
+    helixSeedCollection: "TrigAprProtonHelixMerger"
+    module_type: "HelixFilter"
+    useTrackerStatus: true
+    posHelicitySelection : {
+      @table::AprProtonHelixSelection
+      minMomentum: 250
+    }
+    negHelicitySelection : {
+      @table::AprProtonHelixSelection
+      minMomentum: 250
+    }
+  }
+  AprProtonP150HSFilter: { # p > 150 MeV/c (KE > ~12 MeV), heavily prescaled
+    helixSeedCollection: "TrigAprProtonHelixMerger"
+    module_type: "HelixFilter"
+    useTrackerStatus: true
+    posHelicitySelection : {
+      @table::AprProtonHelixSelection
+      minMomentum: 150
       minNStrawHits: 15
     }
     negHelicitySelection : {
-      @table::AprHelixSelections_neg
-      maxAbsLambda: 1000
-      maxD0: 600
-      minAbsLambda: 40
-      minD0: -600
-      minMomentum: 80
+      @table::AprProtonHelixSelection
+      minMomentum: 150
       minNStrawHits: 15
     }
   }

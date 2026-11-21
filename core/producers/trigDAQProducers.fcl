@@ -1,9 +1,9 @@
 BEGIN_PROLOG
 
 TrigDAQProducers : {
-  ProcessCFOData : {
+  EWMProducer : {
     module_type : EventHeaderFromCFOFragment
-    cfoTag : "CFOBoardReader"
+    cfoTag : "daq:CFO"
     createEWM : true
     diagLevel : 0
   }
@@ -27,6 +27,10 @@ TrigDAQProducers : {
     #         outputFile      : "DTC_packets.bin"
     #         maxDMABlockSize : 32000
     #         bufferSize      : 1000
+  }
+  MSDHitMaker: {
+    debugLevel: 0
+    module_type: MSDHitsFromDTCEvents
   }
 }
 

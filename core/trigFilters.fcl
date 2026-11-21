@@ -9,9 +9,11 @@
 #include "mu2e-trig-config/core/filters/trigTprFilters.fcl"
 #include "mu2e-trig-config/core/filters/trigAprFilters.fcl"
 #include "mu2e-trig-config/core/filters/trigCstFilters.fcl"
+#include "mu2e-trig-config/core/filters/trigTrkFilters.fcl"
 #include "mu2e-trig-config/core/filters/trigSupFilters.fcl"
 #include "mu2e-trig-config/core/filters/trigCalFilters.fcl"
 #include "mu2e-trig-config/core/filters/trigMprFilters.fcl"
+#include "mu2e-trig-config/core/filters/trigCrvFilters.fcl"
 
 BEGIN_PROLOG
 
@@ -22,9 +24,11 @@ TrigFilters : {
     @table::TrigTprFilters
     @table::TrigAprFilters
     @table::TrigCstFilters
+    @table::TrigTrkFilters
     @table::TrigSupFilters
     @table::TrigCalFilters
     @table::TrigMprFilters
+    @table::TrigCrvFilters
   }
 }
 

@@ -6,11 +6,17 @@ TrigDAQFilters: {
         trackerTag         : TrigMakeSH
         protonClusterTag   : "TrigTZClusterFinder:proton"
         electronClusterTag : "TrigTZClusterFinder:electron"
-        headerTag          : ProcessCFOData
+        headerTag          : "EWMProducer"
         eventFreq          : 10000
         passFirst          : true
         diagLevel          : 0
         duplications       : 0
     }
+    MSDHitFilter: {
+        minHits: 1
+        module_type: "MSDHitFilter"
+        tag: "MSDHitMaker"
+    }
+
 }
 END_PROLOG

@@ -1,0 +1,6 @@
+# -*- mode: tcl -*-
+
+#include "mu2e-trig-config/core/trigProducers.fcl"
+#include "mu2e-trig-config/core/trigFilters.fcl"
+#include "mu2e-trig-config/core/trigRecoSequences.fcl"
+#include "mu2e-trig-config/core/trigSequences.fcl"

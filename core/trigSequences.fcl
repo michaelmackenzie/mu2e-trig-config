@@ -231,11 +231,21 @@ TrigTrkPaths:{
     TrigTZClusterFinder, AprHlx50TCFilter, TrigAprHelixFinder,
     TrigAprHelixMerger, AprHlx50HSFilter, AprHlx30TriggerInfoMerger ]
 
-  apr_proton                  : [ @sequence::TrigRecoSequences.cfoDataGen,
-    AprProtonPS, @sequence::TrigRecoSequences.calReco,
+  apr_proton_p335             : [ @sequence::TrigRecoSequences.cfoDataGen,
+    AprProtonP335PS, @sequence::TrigRecoSequences.calReco,
     @sequence::TrigRecoSequences.trkPrepareHits,
     TrigTZClusterFinder, AprProtonTCFilter, TrigAprProtonHelixFinder,
-    TrigAprProtonHelixMerger, AprProtonHSFilter, AprProtonTriggerInfoMerger ]
+    TrigAprProtonHelixMerger, AprProtonP335HSFilter, AprProtonP335TriggerInfoMerger ]
+  apr_proton_p250             : [ @sequence::TrigRecoSequences.cfoDataGen,
+    AprProtonP250PS, @sequence::TrigRecoSequences.calReco,
+    @sequence::TrigRecoSequences.trkPrepareHits,
+    TrigTZClusterFinder, AprProtonTCFilter, TrigAprProtonHelixFinder,
+    TrigAprProtonHelixMerger, AprProtonP250HSFilter, AprProtonP250TriggerInfoMerger ]
+  apr_proton_p150             : [ @sequence::TrigRecoSequences.cfoDataGen,
+    AprProtonP150PS, @sequence::TrigRecoSequences.calReco,
+    @sequence::TrigRecoSequences.trkPrepareHits,
+    TrigTZClusterFinder, AprProtonTCFilter, TrigAprProtonHelixFinder,
+    TrigAprProtonHelixMerger, AprProtonP150HSFilter, AprProtonP150TriggerInfoMerger ]
 
   apr_TC                  : [ @sequence::TrigRecoSequences.cfoDataGen,
     AprTCPS, @sequence::TrigRecoSequences.calReco,
@@ -249,6 +259,18 @@ TrigTrkPaths:{
 }
 
 TrigCaloPaths: {
+  calo_hits: [ @sequence::TrigRecoSequences.cfoDataGen,
+    CaloHitsPS, CaloHitFilter1, CaloHitsTriggerInfoMerger
+  ]
+  calo_csi: [ @sequence::TrigRecoSequences.cfoDataGen,
+    CaloCsiPS, CaloCSIFilter, CaloCSITriggerInfoMerger
+  ]
+  calo_laser: [ @sequence::TrigRecoSequences.cfoDataGen,
+    CaloLaserPS, CaloLaserFilter, CaloLaserTriggerInfoMerger
+  ]
+  calo_caphri: [ @sequence::TrigRecoSequences.cfoDataGen,
+    CaloCaphriPS, CaloCAPHRIFilter, CaloCAPHRITriggerInfoMerger
+  ]
   calo_cosmic: [ @sequence::TrigRecoSequences.cfoDataGen,
     CaloCosmicPS,
     @sequence::TrigRecoSequences.calReco,
@@ -321,13 +343,16 @@ TrigSupPaths:{
   #unbiased filter. It selects the events based on their event id
   #unbiased           : [ unbiasedPS ]
 
-  #minimum bias filters. So far, a filter based on the StrawDigi occupancy
+  #minimum bias filters
+  minBias_unbiased : [ @sequence::TrigRecoSequences.cfoDataGen,  MinBiasUnbiasedPS ]
+
+  #StrawDigi occupancy
   minBias_SDCount : [ @sequence::TrigRecoSequences.cfoDataGen,  MinBiasSDCountPS, MinBiasSDCountFilter]
 
   #filter to select events with large occupancy in the tracker
   #largeSDCount       : [ @sequence::TrigRecoSequences.cfoDataGen,  largeSDCountPS, largeSDCountFilter]
 
-  #minimum bias filters. So far, a filter based on the StrawDigi occupancy
+  #StrawDigi occupancy
   minBias_CDCount : [ @sequence::TrigRecoSequences.cfoDataGen,  MinBiasCDCountPS, MinBiasCDCountFilter]
 
   #filter to select events with large occupancy in the tracker
@@ -344,13 +369,33 @@ TrigSupPaths:{
 
 }
 
+TrigTrkOnlyPaths:{
+  # Require both the straw-hit and time-cluster filters to accept the event.
+  trk_TC : [ @sequence::TrigRecoSequences.cfoDataGen, TrkTCPS,
+    TrigMakeSD, TrigComMakeSH, TrkSHStrawHitFilter,
+    TrkTCSimpleTimeCluster, TrkTCTCFilter, TrkTCTriggerInfoMerger ]
+  trk_SH : [ @sequence::TrigRecoSequences.cfoDataGen, TrkSHPS,
+    TrigMakeSD, TrigComMakeSH, TrkSHStrawHitFilter,
+    TrkSHTriggerInfoMerger ]
+}
+
+TrigCrvPaths:{
+  crv_event : [ @sequence::TrigRecoSequences.cfoDataGen,  CrvEventPS, CrvEventFilter ]
+}
+
+TrigDAQPaths : {
+  msd_hits : [ MSDHitMaker, MSDHitFilter ]
+}
 
 TrigSequences:{
   #@table::TrigRecoSequences
   @table::TrigTrkPaths
+  @table::TrigTrkOnlyPaths
   @table::TrigCaloPaths
   @table::TrigCstPaths
   @table::TrigSupPaths
+  @table::TrigCrvPaths
+  @table::TrigDAQPaths
 }
 
 END_PROLOG

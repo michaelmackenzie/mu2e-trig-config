@@ -16,7 +16,7 @@ TrigRecoSequences:{
    tprKSFDeSequence : [ TrigKSFDe ]
    tprKSFUeSequence : [ TrigKSFUe ]
    #CFO
-   cfoDataGen : [ ProcessCFOData ]
+   cfoDataGen : [ EWMProducer ]
 }
 
 END_PROLOG
