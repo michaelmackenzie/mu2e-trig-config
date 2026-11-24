@@ -128,7 +128,7 @@ TrigCprProducers : {
          1
       ]
       fitparticle: @local::Particle.eminus
-      fitdirection: @local::FitDir.downstream
+      fitdirection: @local::FitDir.upstream
       doSingleOutput: true
       maxEDepAvg: 0.0025
       minNHitsTimeCluster: 10
